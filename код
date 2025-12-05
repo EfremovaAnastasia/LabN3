@@ -8,6 +8,7 @@ class Books{
     private static int maxBooks = 10;
     public static void setMaxBooks(int max) {
         maxBooks = max;
+        System.out.println("Лимит книг установлен: " + max);
     }
     public static int getMaxBooks() {
         return maxBooks;
@@ -17,18 +18,20 @@ class Books{
     }
     public static Books createBook(String author, String title, int pages) {
         if (canAddBook()) {
-            bookCounter++;
-            return new Books(author, title, pages);
+            Books newBook = new Books(author, title, pages);
+            System.out.println("Книга \"" + title + "\" добавлена успешно!");
+            System.out.println("Текущее количество: " + bookCounter + "/" + maxBooks);
+            return newBook;
         } else {
-            System.out.println("Превышен лимит книг (" + maxBooks + ")");
+            System.out.println("Превышен лимит книг (" + maxBooks + ").");
             return null;
         }
     }
-    public Books(String author, String title, int pages) {
+    private Books(String author, String title, int pages) {
         this.author = author;
         this.title = title;
         this.pages = pages;
-        this.bookNumber = bookCounter + 1;
+        this.bookNumber = ++bookCounter;
     }
     @Override
     public String toString() {
@@ -165,4 +168,5 @@ class Books{
         else
             return "NO";
     }
+}
 }
