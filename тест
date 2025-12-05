@@ -1,10 +1,10 @@
 public class лабораторная2 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Books book1 = new Books("Лев Толстой", "Война и мир", 1225);
-        Books book2 = new Books("Фёдор Достоевский", "Преступление и наказание", 672);
-        System.out.println(book1);
-        System.out.println(book2);
+        Books book1 = new Books("Антон Чехов", "Рассказы", 350);
+        Books book2 = new Books("Иван Тургенев", "Отцы и дети", 320);
+        System.out.println(book1); //пункт 2
+        System.out.println(book2); //пункт 2
 
         Books[] booksArray = new Books[4];
         booksArray[0] = new Books("Лев Толстой", "Война и мир", 1225);
@@ -12,19 +12,19 @@ public class лабораторная2 {
         booksArray[2] = new Books("Лев Толстой", "Анна Каренина", 864);
         booksArray[3] = new Books("Александр Пушкин", "Евгений Онегин", 400);
 
-        System.out.println("\nКниг Льва Толстого: " + Books.Countbooks("Лев Толстой", booksArray));
-        System.out.println("Страниц Льва Толстого: " + Books.Countpages("Лев Толстой", booksArray));
+        System.out.println("\nКниг Льва Толстого: " + Books.Countbooks("Лев Толстой", booksArray)); //пункт 3
+        System.out.println("Страниц Льва Толстого: " + Books.Countpages("Лев Толстой", booksArray)); //пункт 4
 
         System.out.println("\nСтатистика по авторам:");
-        Books.printAuthorsInfo(booksArray);
+        Books.printAuthorsInfo(booksArray); //пункты 5 и 6
 
-        System.out.println("\nСреднее количество страниц: " + Books.AverageOfPages(booksArray));
+        System.out.println("\nСреднее количество страниц: " + Books.AverageOfPages(booksArray)); //пункт 7
 
-        System.out.println("\nСреднее количество страниц Толстого: " + Books.AverageOfPagesAuthor("Лев Толстой", booksArray));
+        System.out.println("\nСреднее количество страниц Толстого: " + Books.AverageOfPagesAuthor("Лев Толстой", booksArray)); //пункт 8
 
-        System.out.println("\nАвтор с наибольшим количеством книг: " + Books.AuthorMostBooks(booksArray));
-        System.out.println("Автор с наибольшим объемом страниц: " + Books.AuthorMostPages(booksArray));
+        System.out.println("\nАвтор с наибольшим количеством книг: " + Books.AuthorMostBooks(booksArray)); //пункт 9
+        System.out.println("Автор с наибольшим объемом страниц: " + Books.AuthorMostPages(booksArray)); //пункт 9
 
-        System.out.println("Проверка: " + Books.Comparison(booksArray));
+        System.out.println("Проверка: " + Books.Comparison(booksArray)); //пункт 10
     }
 }
