@@ -1,16 +1,18 @@
-public class лабораторная2 {
+public class лабораторная {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Books book1 = new Books("Антон Чехов", "Рассказы", 350);
-        Books book2 = new Books("Иван Тургенев", "Отцы и дети", 320);
+        Books.setMaxBooks(10); //пункт 11
+        
+        Books book1 = Books.createBook("Лев Толстой", "Война и мир", 1225);
+        Books book2 = Books.createBook("Фёдор Достоевский", "Преступление и наказание", 672);
         System.out.println(book1); //пункт 2
         System.out.println(book2); //пункт 2
 
         Books[] booksArray = new Books[4];
-        booksArray[0] = new Books("Лев Толстой", "Война и мир", 1225);
-        booksArray[1] = new Books("Фёдор Достоевский", "Преступление и наказание", 672);
-        booksArray[2] = new Books("Лев Толстой", "Анна Каренина", 864);
-        booksArray[3] = new Books("Александр Пушкин", "Евгений Онегин", 400);
+        booksArray[0] = Books.createBook("Лев Толстой", "Война и мир", 1225);
+        booksArray[1] = Books.createBook("Фёдор Достоевский", "Преступление и наказание", 672);
+        booksArray[2] = Books.createBook("Лев Толстой", "Анна Каренина", 864);
+        booksArray[3] = Books.createBook("Александр Пушкин", "Евгений Онегин", 400);
 
         System.out.println("\nКниг Льва Толстого: " + Books.Countbooks("Лев Толстой", booksArray)); //пункт 3
         System.out.println("Страниц Льва Толстого: " + Books.Countpages("Лев Толстой", booksArray)); //пункт 4
@@ -26,5 +28,8 @@ public class лабораторная2 {
         System.out.println("Автор с наибольшим объемом страниц: " + Books.AuthorMostPages(booksArray)); //пункт 9
 
         System.out.println("Проверка: " + Books.Comparison(booksArray)); //пункт 10
+
+        System.out.println("Всего создано книг: " + Books.getBookCounter()); //пункт 11
+        System.out.println("Максимально допустимое количество: " + Books.getMaxBooks()); //пункт 11
     }
 }
