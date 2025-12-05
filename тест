@@ -1,0 +1,30 @@
+public class лабораторная2 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Books book1 = new Books("Лев Толстой", "Война и мир", 1225);
+        Books book2 = new Books("Фёдор Достоевский", "Преступление и наказание", 672);
+        System.out.println(book1);
+        System.out.println(book2);
+
+        Books[] booksArray = new Books[4];
+        booksArray[0] = new Books("Лев Толстой", "Война и мир", 1225);
+        booksArray[1] = new Books("Фёдор Достоевский", "Преступление и наказание", 672);
+        booksArray[2] = new Books("Лев Толстой", "Анна Каренина", 864);
+        booksArray[3] = new Books("Александр Пушкин", "Евгений Онегин", 400);
+
+        System.out.println("\nКниг Льва Толстого: " + Books.Countbooks("Лев Толстой", booksArray));
+        System.out.println("Страниц Льва Толстого: " + Books.Countpages("Лев Толстой", booksArray));
+
+        System.out.println("\nСтатистика по авторам:");
+        Books.printAuthorsInfo(booksArray);
+
+        System.out.println("\nСреднее количество страниц: " + Books.AverageOfPages(booksArray));
+
+        System.out.println("\nСреднее количество страниц Толстого: " + Books.AverageOfPagesAuthor("Лев Толстой", booksArray));
+
+        System.out.println("\nАвтор с наибольшим количеством книг: " + Books.AuthorMostBooks(booksArray));
+        System.out.println("Автор с наибольшим объемом страниц: " + Books.AuthorMostPages(booksArray));
+
+        System.out.println("Проверка: " + Books.Comparison(booksArray));
+    }
+}
