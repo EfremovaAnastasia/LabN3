@@ -18,7 +18,8 @@ public class лабораторная {
         System.out.println("Страниц Льва Толстого: " + Books.Countpages("Лев Толстой", booksArray)); //пункт 4
 
         System.out.println("\nСтатистика по авторам:");
-        Books.printAuthorsInfo(booksArray); //пункты 5 и 6
+        Books a = new Books();
+        a.printAuthorsInfo(booksArray); //пункты 5 и 6
 
         System.out.println("\nСреднее количество страниц: " + Books.AverageOfPages(booksArray)); //пункт 7
 
