@@ -6,6 +6,8 @@ class Books{
     private static int bookCounter = 0;
     private int bookNumber;
     private static int maxBooks = 10;
+    public Books() {
+    }
     public static void setMaxBooks(int max) {
         maxBooks = max;
         System.out.println("Лимит книг установлен: " + max);
@@ -46,30 +48,32 @@ class Books{
     public static int getBookCounter(){
         return bookCounter;
     }
-    public static int Countbooks(String author, Books[] booksArray) {
+    public static int countBooks(String author, Books[] booksArray) {
         int count = 0;
         for (Books book : booksArray) {
-            if (book.getAuthor().equals(author)) {
+            if ((book != null) && (book.getAuthor().equals(author))) {
                 count++;
             }
         }
         return count;
     }
-    public static int Countpages(String author, Books[] booksArray) {
+    public static int countPages(String author, Books[] booksArray) {
         int count = 0;
         for (Books book : booksArray) {
-            if (book.getAuthor().equals(author)) {
+            if ((book != null) && (book.getAuthor().equals(author))) {
                 count += book.pages;
             }
         }
         return count;
     }
-    public static int Countauthors(Books[] booksArray) {
+    public static int countAuthors(Books[] booksArray) {
         int count = 0;
         for (int i = 0; i < booksArray.length; i++) {
+            if (booksArray[i] == null)
+                continue;
             int s = 1;
             for (int j = 0; j < i; j++) {
-                if (booksArray[i].getAuthor().equals(booksArray[j].getAuthor())) {
+                if ((booksArray[j] != null) && (booksArray[i].getAuthor().equals(booksArray[j].getAuthor()))) {
                     s = 0;
                     break;
                 }
@@ -83,9 +87,11 @@ class Books{
     public static String getAuthorByIndex(int index, Books[] booksArray) {
         int uniqueIndex = 0;
         for (int i = 0; i < booksArray.length; i++) {
+            if (booksArray[i] == null)
+                continue;
             int y = 1;
             for (int j = 0; j < i; j++) {
-                if (booksArray[i].getAuthor().equals(booksArray[j].getAuthor())) {
+                if ((booksArray[j] != null) && (booksArray[i].getAuthor().equals(booksArray[j].getAuthor()))) {
                     y = 0;
                     break;
                 }
@@ -99,73 +105,95 @@ class Books{
         }
         return null;
     }
-    public static String[] Listauthors(Books[] booksArray) {
-        int uniqueCount = Countauthors(booksArray);
+    public static String[] listAuthors(Books[] booksArray) {
+        int uniqueCount = countAuthors(booksArray);
         String[] res = new String[uniqueCount];
         for (int k = 0; k < uniqueCount; k++) {
             res[k] = getAuthorByIndex(k, booksArray);
         }
         return res;
     }
-    public static void printAuthorsInfo(Books[] booksArray) {
-        int uniqueAuthors = Countauthors(booksArray);
+    public void printAuthorsInfo(Books[] booksArray) {
+        int uniqueAuthors = countAuthors(booksArray);
         for (int i = 0; i < uniqueAuthors; i++) {
             String author = getAuthorByIndex(i, booksArray);
-            int booksCount = Countbooks(author, booksArray);
-            int pagesCount = Countpages(author, booksArray);
+            int booksCount = countBooks(author, booksArray);
+            int pagesCount = countPages(author, booksArray);
             System.out.println("Автор: " + author +
                     ". Количество книг: " + booksCount +
                     ". Объем страниц: " + pagesCount + ".");
         }
     }
-    public static int AverageOfPages(Books[] booksArray) {
+    public static int averageOfPages(Books[] booksArray) {
         int count = 0;
+        int v = 0;
         for (Books book : booksArray) {
-            count += book.getPages();
+            if (book != null) {
+                count += book.getPages();
+                v++;
             }
-        return count / booksArray.length;
+        }
+        if (v > 0)
+            return count / v;
+        else
+            return 0;
     }
-    public static int AverageOfPagesAuthor(String author, Books[] booksArray) {
+    public static int averageOfPagesAuthor(String author, Books[] booksArray) {
         int count = 0;
         int k = 0;
         for (Books book : booksArray) {
-            if (book.getAuthor().equals(author)) {
+            if ((book != null) && (book.getAuthor().equals(author))) {
                 count += book.pages;
                 k++;
             }
         }
-        return count / k;
+        if (k > 0)
+            return count / k;
+        else
+            return 0;
     }
-    public static String AuthorMostBooks(Books[] booksArray) {
-        String[] authors = Listauthors(booksArray);
+    public static String authorMostBooks(Books[] booksArray) {
+        String[] authors = listAuthors(booksArray);
         String maxAuthor = "";
         int maxBooks = 0;
         for (String author : authors) {
-            int booksCount = Countbooks(author, booksArray);
-            if (booksCount > maxBooks) {
-                maxBooks = booksCount;
-                maxAuthor = author;
+            if (author != null) {
+                int booksCount = countBooks(author, booksArray);
+                if (booksCount > maxBooks) {
+                    maxBooks = booksCount;
+                    maxAuthor = author;
+                }
             }
         }
         return maxAuthor;
     }
-    public static String AuthorMostPages(Books[] booksArray) {
-        String[] authors = Listauthors(booksArray);
+    public static String authorMostPages(Books[] booksArray) {
+        String[] authors = listAuthors(booksArray);
         String maxAuthor = "";
         int maxPages = 0;
         for (String author : authors) {
-            int pagesCount = Countpages(author, booksArray);
-            if (pagesCount > maxPages) {
-                maxPages = pagesCount;
-                maxAuthor = author;
+            if (author != null) {
+                int pagesCount = countPages(author, booksArray);
+                if (pagesCount > maxPages) {
+                    maxPages = pagesCount;
+                    maxAuthor = author;
+                }
             }
         }
         return maxAuthor;
     }
-    public static String Comparison(Books[] booksArray){
-        if (AuthorMostPages(booksArray).equals(AuthorMostBooks(booksArray)))
+    public static String comparisonMostPagesAndMostBooks(Books[] booksArray){
+        String mostPages = authorMostPages(booksArray);
+        String mostBooks = authorMostBooks(booksArray);
+        if ((mostPages == null) || (mostBooks == null)) {
+            return "NO";
+        }
+        if (mostPages.equals(mostBooks))
             return "YES";
         else
+            return "NO";
+    }
+}
             return "NO";
     }
 }
